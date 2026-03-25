@@ -1,0 +1,5 @@
+﻿Flask>=3.0
+qrcode[pil]
+Pillow>=10
+gunicorn
+opencv-python
