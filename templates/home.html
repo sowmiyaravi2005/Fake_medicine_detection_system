@@ -1,0 +1,41 @@
+﻿{% extends 'base.html' %}
+{% block title %}Welcome · Fake Medicine Detection{% endblock %}
+{% block content %}
+<div class="home-hero text-center text-white mb-5">
+  <p class="text-uppercase small mb-2">Dual access</p>
+  <h2 class="display-5 fw-semibold">Secure scanning starts with trusted credentials.</h2>
+  <p class="lead text-white-75">Choose your role to continue. Users unlock the mobile scanner; admins manage batches and QR codes.</p>
+</div>
+<div class="row g-4 justify-content-center">
+  <div class="col-md-5">
+    <div class="card role-card shadow-lg border-0">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <span class="role-icon bg-success text-white rounded-circle"><i class="fa-solid fa-user"></i></span>
+        </div>
+        <h3 class="h5 mb-3">User Access</h3>
+        <p class="text-muted">Register or log in to open the live scanner and verify medicine authenticity.</p>
+        <div class="d-grid gap-2">
+          <a href="{{ url_for('user_login') }}" class="btn btn-success">User Login</a>
+          <a href="{{ url_for('user_register') }}" class="btn btn-outline-success">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card role-card shadow-lg border-0">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <span class="role-icon bg-primary text-white rounded-circle"><i class="fa-solid fa-user-shield"></i></span>
+        </div>
+        <h3 class="h5 mb-3">Admin Access</h3>
+        <p class="text-muted">Licensed admins generate QR-backed batches and view only their own medicine records.</p>
+        <div class="d-grid gap-2">
+          <a href="{{ url_for('admin_login') }}" class="btn btn-primary">Admin Login</a>
+          <a href="{{ url_for('admin_register') }}" class="btn btn-outline-primary">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

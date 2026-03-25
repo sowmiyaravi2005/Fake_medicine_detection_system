@@ -1,0 +1,30 @@
+﻿{% extends 'base.html' %}
+{% block title %}User Register · Fake Medicine Detection{% endblock %}
+{% block content %}
+<div class="auth-wrapper d-flex justify-content-center">
+  <div class="card form-card shadow-lg border-0 w-100" style="max-width: 460px;">
+    <div class="card-body">
+      <p class="text-uppercase text-success small mb-2">User Registration</p>
+      <h2 class="h4 mb-3">Join to scan medicine QR codes</h2>
+      <form method="post" class="row g-3">
+        <div class="col-12 form-floating">
+          <input type="text" name="username" class="form-control" id="user-username" placeholder="Username" required>
+          <label for="user-username">Username</label>
+        </div>
+        <div class="col-12 form-floating">
+          <input type="email" name="email" class="form-control" id="user-email" placeholder="Email" required>
+          <label for="user-email">Email</label>
+        </div>
+        <div class="col-12 form-floating">
+          <input type="password" name="password" class="form-control" id="user-password" placeholder="Password" required>
+          <label for="user-password">Password</label>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-success w-100">Register &amp; Login</button>
+        </div>
+      </form>
+      <p class="small text-muted text-center mt-3">Already registered? <a href="{{ url_for('user_login') }}">Log in here</a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

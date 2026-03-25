@@ -1,0 +1,75 @@
+﻿{% extends 'base.html' %}
+{% block title %}Scanner · Fake Medicine Detection{% endblock %}
+{% block content %}
+<div class="scanner-shell">
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card scanner-card shadow-lg border-0">
+        <div class="card-body d-flex flex-column gap-3">
+          <div>
+            <p class="text-uppercase text-success small mb-1">Live scanner</p>
+            <h2 class="h4 fw-semibold">{{ user or 'Trusted user' }}, ready to scan?</h2>
+            <p class="text-muted mb-0">Use the camera, upload an image, or switch between modes as needed.</p>
+          </div>
+          <div id="reader" class="scanner-frame mx-auto"></div>
+          <div class="d-flex flex-wrap gap-2 controls">
+            <button type="button" id="start-scan" class="btn btn-sm btn-light">▶️ Start Scan</button>
+            <button type="button" id="stop-scan" class="btn btn-sm btn-outline-light">⏹️ Stop Scan</button>
+            <button type="button" id="scan-again" class="btn btn-sm btn-outline-success" disabled>🔄 Scan Again</button>
+            <button type="button" id="upload-btn" class="btn btn-sm btn-outline-info">📁 Upload Image</button>
+            <input type="file" id="qr-image" accept="image/png,image/jpeg" hidden>
+          </div>
+          <div class="preview-wrapper">
+            <p class="small text-white-50 mb-1">Image preview</p>
+            <div class="preview-frame">
+              <img id="image-preview" alt="Uploaded QR preview" />
+              <span class="preview-placeholder">No image selected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card result-card shadow-lg border-0">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <p class="text-uppercase text-primary small mb-1" >Last verification</p>
+              <h3 class="h6 mb-0" id="result-headline">Awaiting scan</h3>
+            </div>
+            <span id="result-badge" class="badge bg-secondary">Idle</span>
+          </div>
+          <p class="text-muted small mb-4" id="result-summary" style="color: aliceblue;">Point a QR scanner here or upload an image.</p>
+          <div id="result-details" class="text-muted small"></div>
+          <div class="mt-auto text-center pt-3 text-muted small" style="color: aliceblue;">Encrypted UUID tokens · Flask verification</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="scanResultModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="result-modal-title">Verification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-status" class="fw-semibold mb-2"></p>
+        <div id="modal-details"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="modal-scan-again">Scan again</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
+{% endblock %}
