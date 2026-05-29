@@ -4,7 +4,7 @@ import uuid
 from contextlib import closing
 from datetime import datetime
 from functools import wraps
-
+from flask import Response
 import qrcode
 from flask import (
     Flask,
@@ -374,6 +374,16 @@ def logout():
 
 
 init_db()
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    xml = '''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>https://fake-medicine-detection-system.onrender.com/</loc>
+   </url>
+</urlset>'''
+    
+    return Response(xml, mimetype='application/xml')
 
 
 if __name__ == "__main__":
